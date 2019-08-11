@@ -3,13 +3,14 @@ using System.Threading.Tasks;
 using RoseByte.SharpArgs.Exceptions;
 using RoseByte.SharpArgs.Internal.Extensions;
 using RoseByte.SharpArgs.Internal.Parser;
+using RoseByte.SharpArgs.Internal.Routers.BaseClasses;
 
 // ReSharper disable once CheckNamespace
 namespace RoseByte.SharpArgs
 {
     public static class RouterExtensions
     {
-        public static void Run(this IRouter router, string[] args)
+        public static void Run(this IRouter<IRoute> router, string[] args)
         {
             var value = args.FirstOrDefault()?.ToLower();
             
@@ -24,7 +25,7 @@ namespace RoseByte.SharpArgs
             route.Execute();
         }
         
-        public static async Task Run(this IAsyncRouter router, string[] args)
+        public static async Task Run(this IRouter<IAsyncRoute> router, string[] args)
         {
             var value = args.FirstOrDefault()?.ToLower();
 
