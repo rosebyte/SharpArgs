@@ -57,7 +57,8 @@ Task("Package")
         var settings = new DotNetCorePackSettings
         {
             OutputDirectory = artifactsDir,
-            NoBuild = true
+            NoBuild = true,
+            Configuration = configuration
         };
         DotNetCorePack(project, settings);
     });
