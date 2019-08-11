@@ -2,11 +2,14 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using RoseByte.SharpArgs.Internal.Attributes;
-using RoseByte.SharpArgs.Internal.Exceptions;
+using RoseByte.SharpArgs.Attributes;
+using RoseByte.SharpArgs.Exceptions;
+using RoseByte.SharpArgs.Internal;
+using RoseByte.SharpArgs.Internal.Extensions;
 using RoseByte.SharpArgs.Internal.Helpers;
 
-namespace RoseByte.SharpArgs.Internal.Extensions
+// ReSharper disable once CheckNamespace
+namespace RoseByte.SharpArgs
 {
     public static class ServiceCollectionExtensions
     {

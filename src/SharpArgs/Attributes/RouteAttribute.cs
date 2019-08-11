@@ -1,6 +1,6 @@
 using System;
 
-namespace RoseByte.SharpArgs.Internal.Attributes
+namespace RoseByte.SharpArgs.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class RouteAttribute : Attribute

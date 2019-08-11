@@ -5,7 +5,7 @@ using RoseByte.SharpArgs.Internal.Routers.BaseClasses;
 
 namespace RoseByte.SharpArgs.Internal.Routers
 {
-    public class AsyncRouter : Router<IAsyncRoute>, IAsyncRouter
+    internal class AsyncRouter : Router<IAsyncRoute>, IAsyncRouter
     {
         internal AsyncRouter() { }
         internal AsyncRouter(IServiceCollection collection) : base(collection.UseAsyncRouter()) { }

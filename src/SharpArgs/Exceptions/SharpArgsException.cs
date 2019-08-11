@@ -1,6 +1,6 @@
 using System;
 
-namespace RoseByte.SharpArgs.Internal.Exceptions
+namespace RoseByte.SharpArgs.Exceptions
 {
     public class SharpArgsException : Exception
     {

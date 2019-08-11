@@ -2,7 +2,7 @@ using System.Linq;
 
 namespace RoseByte.SharpArgs.Internal.Parser
 {
-    public class Part
+    internal class Part
     {
         public string Content { get; }
         private readonly IReadOnlyParsingOptions _options;

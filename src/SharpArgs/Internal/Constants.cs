@@ -1,10 +1,13 @@
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("RoseByte.SharpArgs.Tests")]
 namespace RoseByte.SharpArgs.Internal
 {
-    public class Constants
+    internal static class Constants
     {
-        public class Exceptions
+        internal static class Exceptions
         {
-            public const string ServiceCollectionAlreadyUsed = "SharpArgs alredy initialized in this IServiceCollection.";
+            internal const string ServiceCollectionAlreadyUsed = "SharpArgs alredy initialized in this IServiceCollection.";
         }
     }
 }

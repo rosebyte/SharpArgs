@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using RoseByte.SharpArgs.Internal.Exceptions;
+using RoseByte.SharpArgs.Exceptions;
 using RoseByte.SharpArgs.Internal.Properties;
 
 namespace RoseByte.SharpArgs.Internal.Parser
 {
-    public class OptionsParser
+    internal class OptionsParser
     {
         public void ParseParams(
             IReadOnlyList<string> args, 

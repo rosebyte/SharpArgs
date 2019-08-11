@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using RoseByte.SharpArgs.Internal.Attributes;
-using RoseByte.SharpArgs.Internal.Exceptions;
+using RoseByte.SharpArgs.Attributes;
+using RoseByte.SharpArgs.Exceptions;
 using RoseByte.SharpArgs.Internal.Extensions;
 using RoseByte.SharpArgs.Internal.Helpers;
 using RoseByte.SharpArgs.Internal.Parser;
 
 namespace RoseByte.SharpArgs.Internal.Routers.BaseClasses
 {
-    public class Router<TRoute> : IRouter<TRoute>
+    internal class Router<TRoute> : IRouter<TRoute>
     {
         private readonly ParsingOptions _options;
         public IReadOnlyParsingOptions Options => _options;

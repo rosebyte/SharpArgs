@@ -1,13 +1,13 @@
 using System;
 using System.ComponentModel;
 using System.Reflection;
-using RoseByte.SharpArgs.Internal.Attributes;
+using RoseByte.SharpArgs.Attributes;
 using RoseByte.SharpArgs.Internal.Extensions;
-using DescriptionAttribute = RoseByte.SharpArgs.Internal.Attributes.DescriptionAttribute;
+using DescriptionAttribute = RoseByte.SharpArgs.Attributes.DescriptionAttribute;
 
 namespace RoseByte.SharpArgs.Internal.Properties
 {
-    public class Property
+    internal class Property
     {
         public int? Order => Info.GetAttribute<OrderAttribute>()?.Order;
         public char? Shortcut => Info.GetAttribute<ShortcutAttribute>()?.Shortcut;

@@ -1,6 +1,6 @@
 using System;
 
-namespace RoseByte.SharpArgs.Internal.Attributes
+namespace RoseByte.SharpArgs.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property)]
     public class DescriptionAttribute : Attribute

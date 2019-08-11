@@ -5,7 +5,7 @@ using RoseByte.SharpArgs.Internal.Routers.BaseClasses;
 
 namespace RoseByte.SharpArgs.Internal.Routers
 {
-    public class Router : Router<IRoute>, IRouter
+    internal class Router : Router<IRoute>, IRouter
     {
         internal Router() { }
         internal Router(IServiceCollection collection) : base(collection.UseRouter()) { }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace RoseByte.SharpArgs.Internal.Helpers
 {
-    public class TypeHelper
+    internal class TypeHelper
     {
-        public IReadOnlyList<Type> Types { get; }
-        public TypeHelper(IReadOnlyList<Type> types) => Types = types;
+        internal IReadOnlyList<Type> Types { get; }
+        internal TypeHelper(IReadOnlyList<Type> types) => Types = types;
     }
 }

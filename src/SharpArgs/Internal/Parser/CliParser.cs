@@ -4,7 +4,7 @@ using RoseByte.SharpArgs.Internal.Properties;
 
 namespace RoseByte.SharpArgs.Internal.Parser
 {
-    public class CliParser
+    internal class CliParser
     {
         private readonly Dictionary<string, Property> _labels = new Dictionary<string, Property>();
         private readonly Dictionary<int, Property> _positions = new Dictionary<int, Property>();
