@@ -8,7 +8,7 @@ environment:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   NUGET_API_KEY:
-    secure: Dmw9n4hdXhvo3CQRxLGPcKFdw0AtC6FiL0PQDryxa3uVMerx4FtO74N5e712im4v
+    secure: k6qI543vteoqG7C9otlK8gE4+zTK75VRZUosQyEAinEqa0+wBsbqe/Ah/vRJZ6L8
 build_script:
 - ps: .\build.ps1 --currentBranch=$env:APPVEYOR_REPO_BRANCH --nugetApiKey=$env:NUGET_API_KEY
 test: off

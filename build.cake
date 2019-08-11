@@ -5,9 +5,9 @@ using NuGet;
 
 var target = Argument("target", "Default");
 var artifactsDir = "./artifacts/";
-var solutionPath = "./SharpFiles.sln";
-var project = "./src/SharpFiles/SharpFiles.csproj";
-var testProject = "./tests/SharpFiles.Tests/SharpFiles.Tests.csproj";
+var solutionPath = "./SharpArgs.sln";
+var project = "./src/SharpArgs/SharpArgs.csproj";
+var testProject = "./test/SharpArgs.Tests/SharpArgs.Tests.csproj";
 var currentBranch = Argument<string>("currentBranch", GitBranchCurrent("./").FriendlyName);
 var isReleaseBuild = string.Equals(currentBranch, "master", StringComparison.OrdinalIgnoreCase);
 var configuration = "Release";
