@@ -6,6 +6,7 @@ namespace RoseByte.SharpArgs.Internal.Routers.BaseClasses
     {
         IReadOnlyParsingOptions Options { get; }
         bool TryGetRoute<T>(string name, out T route, out bool defaultUsed);
+        ICliParser GetParser();
         IRouter<TRoute> WithOptionPrefix(string prefix);
         IRouter<TRoute> WithFlagPrefix(string prefix);
         IRouter<TRoute> WithCombinedFlagsAllowed();

@@ -4,14 +4,14 @@ using RoseByte.SharpArgs.Internal.Properties;
 
 namespace RoseByte.SharpArgs.Internal.Parser
 {
-    internal class CliParser
+    public class CliParser : ICliParser
     {
         private readonly Dictionary<string, Property> _labels = new Dictionary<string, Property>();
         private readonly Dictionary<int, Property> _positions = new Dictionary<int, Property>();
         private readonly Dictionary<char, Property> _shortcuts = new Dictionary<char, Property>();
         private readonly HashSet<Property> _resolved = new HashSet<Property>();
 
-        public CliParser Scan(IEnumerable<Property> properties)
+        public ICliParser Scan(IEnumerable<Property> properties)
         {
             foreach (var prop in properties.Where(x => !x.Ignore))
             {

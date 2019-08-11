@@ -7,7 +7,7 @@ using DescriptionAttribute = RoseByte.SharpArgs.Attributes.DescriptionAttribute;
 
 namespace RoseByte.SharpArgs.Internal.Properties
 {
-    internal class Property
+    public class Property
     {
         public int? Order => Info.GetAttribute<OrderAttribute>()?.Order;
         public char? Shortcut => Info.GetAttribute<ShortcutAttribute>()?.Shortcut;

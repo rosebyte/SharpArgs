@@ -25,6 +25,8 @@ namespace RoseByte.SharpArgs.Internal.Routers.BaseClasses
             _options = new ParsingOptions();
             RegisterRoutes(provider);
         }
+
+        public ICliParser GetParser() => _provider.GetService<ICliParser>();
         
         public bool TryGetRoute<T>(string name, out T route, out bool defaultUsed)
         {
