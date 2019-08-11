@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using RoseByte.SharpArgs.Attributes;
+using RoseByte.SharpArgs.Internal.Properties;
 
 namespace RoseByte.SharpArgs.Internal.Extensions
 {
@@ -13,6 +16,13 @@ namespace RoseByte.SharpArgs.Internal.Extensions
         internal static T GetAttribute<T>(this Type source) where T : Attribute
         {
             return (T)source.GetCustomAttributes(true).FirstOrDefault(x => x.GetType() == typeof(T));
+        }
+
+        internal static IEnumerable<Property> ExtractProperties(object route)
+        {
+            return route.GetType().GetProperties()
+                .Where(x => !x.HasAttribute<IgnoreAttribute>())
+                .Select(x => new Property(route, x));
         }
     }
 }

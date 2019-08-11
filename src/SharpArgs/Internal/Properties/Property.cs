@@ -7,7 +7,7 @@ using DescriptionAttribute = RoseByte.SharpArgs.Attributes.DescriptionAttribute;
 
 namespace RoseByte.SharpArgs.Internal.Properties
 {
-    public class Property
+    public class Property : IEquatable<Property>
     {
         public int? Order => Info.GetAttribute<OrderAttribute>()?.Order;
         public char? Shortcut => Info.GetAttribute<ShortcutAttribute>()?.Shortcut;
@@ -16,7 +16,7 @@ namespace RoseByte.SharpArgs.Internal.Properties
         public bool Ignore => Info.HasAttribute<IgnoreAttribute>();
         public string Name => Info.Name.ToLower();
         public Type Type => Info.PropertyType;
-        
+
         private object Instance { get; }
         private PropertyInfo Info { get; }
         
@@ -38,6 +38,41 @@ namespace RoseByte.SharpArgs.Internal.Properties
             var converter = TypeDescriptor.GetConverter(Type);
             var result = converter.ConvertFromString(value);
             Info.SetValue(Instance, result);
+        }
+
+        public static bool operator ==(Property a, Property b)
+        {
+            return a?.Instance == b?.Instance && a?.Info == b?.Info;
+        }
+
+        public static bool operator !=(Property a, Property b)
+        {
+            return a?.Instance != b?.Instance || a?.Info != b?.Info;
+        }
+
+        public bool Equals(Property other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(Instance, other.Instance) && Equals(Info, other.Info);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((Property) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var instance = Instance != null ? Instance.GetHashCode() : 0;
+                var info = Info != null ? Info.GetHashCode() : 0;
+                return (instance * 397) ^ info;
+            }
         }
     }
 }

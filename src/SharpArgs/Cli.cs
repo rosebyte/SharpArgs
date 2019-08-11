@@ -1,25 +1,17 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
-using RoseByte.SharpArgs.Internal.Routers;
+using RoseByte.SharpArgs.Internal.Routers.BaseClasses;
 
 namespace RoseByte.SharpArgs
 {
     public static class Cli
     {
-        public static IRouter Router()
+        public static IRouter<T> Router<T>()
         {
-            var provider = new ServiceCollection().UseRouter().BuildServiceProvider();
-            return provider.GetService<Router>();
+            var provider = new ServiceCollection().UseSharpArgs<T>().BuildServiceProvider();
+            return provider.GetService<Router<T>>();
         }
 
-        public static IRouter Router(IServiceProvider provider) => provider.GetService<IRouter>();
-        
-        public static IAsyncRouter AsyncRouter()
-        { 
-            var provider = new ServiceCollection().UseRouter().BuildServiceProvider();
-            return provider.GetService<AsyncRouter>();
-        }
-
-        public static IAsyncRouter AsyncRouter(IServiceProvider provider) => provider.GetService<IAsyncRouter>();
+        public static IRouter<T> Router<T>(IServiceProvider provider) => provider.GetService<IRouter<T>>();
     }
 }
