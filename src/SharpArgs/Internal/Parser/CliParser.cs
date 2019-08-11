@@ -10,15 +10,15 @@ namespace RoseByte.SharpArgs.Internal.Parser
         private readonly Dictionary<int, Property> _positions = new Dictionary<int, Property>();
         private readonly Dictionary<char, Property> _shortcuts = new Dictionary<char, Property>();
         private readonly HashSet<Property> _resolved = new HashSet<Property>();
-        private readonly IReadOnlyParsingOptions _options;
 
-        public CliParser(IEnumerable<Property> properties, IReadOnlyParsingOptions options)
+        public CliParser Scan(IEnumerable<Property> properties)
         {
-            _options = options;
             foreach (var prop in properties.Where(x => !x.Ignore))
             {
                 Register(prop);
             }
+
+            return this;
         }
         
         private void Register(Property property)
@@ -36,17 +36,15 @@ namespace RoseByte.SharpArgs.Internal.Parser
             _labels.Add(property.Label, property);
         }
 
-        public void Parse(IReadOnlyList<string> args)
+        public void Parse(IReadOnlyList<string> args, IReadOnlyParsingOptions options)
         {
             var arguments = args
-                .TakeWhile(arg => !arg.StartsWith(_options.OptionPrefix) && !arg.StartsWith(_options.FlagPrefix))
+                .TakeWhile(arg => !arg.StartsWith(options.OptionPrefix) && !arg.StartsWith(options.FlagPrefix))
                 .ToList();
 
-            new OptionsParser().ParseParams(args.Skip(arguments.Count).ToList(), _options, _labels, _shortcuts, 
+            new OptionsParser().ParseParams(args.Skip(arguments.Count).ToList(), options, _labels, _shortcuts, 
                 _resolved);
             new ArgumentsParser().ParseArgs(arguments, _positions, _resolved);
         }
-        
-        
     }
 }

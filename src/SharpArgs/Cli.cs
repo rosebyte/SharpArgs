@@ -6,12 +6,20 @@ namespace RoseByte.SharpArgs
 {
     public class Cli
     {
-        public static IRouter Router() => new Router();
-        public static IRouter Router(IServiceCollection collection) => new Router(collection);
+        public static IRouter Router()
+        {
+            var provider = new ServiceCollection().UseRouter().BuildServiceProvider();
+            return provider.GetService<Router>();
+        }
+        
         public static IRouter Router(IServiceProvider provider) => new Router(provider);
         
-        public static IAsyncRouter AsyncRouter() => new AsyncRouter();
-        public static IAsyncRouter AsyncRouter(IServiceCollection collection) => new AsyncRouter(collection);
+        public static IAsyncRouter AsyncRouter()
+        { 
+            var provider = new ServiceCollection().UseRouter().BuildServiceProvider();
+            return provider.GetService<AsyncRouter>();
+        }
+        
         public static IAsyncRouter AsyncRouter(IServiceProvider provider) => new AsyncRouter(provider);
     }
 }

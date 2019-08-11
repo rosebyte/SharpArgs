@@ -7,6 +7,8 @@ using RoseByte.SharpArgs.Exceptions;
 using RoseByte.SharpArgs.Internal;
 using RoseByte.SharpArgs.Internal.Extensions;
 using RoseByte.SharpArgs.Internal.Helpers;
+using RoseByte.SharpArgs.Internal.Parser;
+using RoseByte.SharpArgs.Internal.Routers;
 
 // ReSharper disable once CheckNamespace
 namespace RoseByte.SharpArgs
@@ -35,6 +37,9 @@ namespace RoseByte.SharpArgs
                 .ToList();
 
             collection.AddSingleton(new TypeHelper(types));
+            collection.AddTransient<CliParser>();
+            collection.AddTransient<IRouter, Router>();
+            collection.AddTransient<IAsyncRouter, AsyncRouter>();
             
             if (types.All(x => !x.HasAttribute<DefaultAttribute>()))
             {

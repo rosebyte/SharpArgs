@@ -18,8 +18,6 @@ namespace RoseByte.SharpArgs.Internal.Routers.BaseClasses
         private Type _default;
         private readonly IServiceProvider _provider;
 
-        protected Router() : this(new ServiceCollection()) { }
-        protected Router(IServiceCollection collection) : this(collection.BuildServiceProvider()) { }
         protected Router(IServiceProvider provider)
         {
             _routes = new Dictionary<string, Type>();

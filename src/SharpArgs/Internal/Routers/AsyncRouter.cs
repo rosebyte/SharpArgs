@@ -7,8 +7,6 @@ namespace RoseByte.SharpArgs.Internal.Routers
 {
     internal class AsyncRouter : Router<IAsyncRoute>, IAsyncRouter
     {
-        internal AsyncRouter() { }
-        internal AsyncRouter(IServiceCollection collection) : base(collection.UseAsyncRouter()) { }
         internal AsyncRouter(IServiceProvider provider) : base(provider) { }
     }
 }

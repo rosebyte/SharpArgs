@@ -19,8 +19,8 @@ namespace RoseByte.SharpArgs
                 throw new SharpArgsException($"No suitable route found for: {value ?? "(null)"}");
             }
             
-            new CliParser(route.Properties(), router.Options)
-                .Parse(args.Skip(defaultUsed ? 0 : 1).ToList());
+            new CliParser().Scan(route.Properties())
+                .Parse(args.Skip(defaultUsed ? 0 : 1).ToList(), router.Options);
             
             route.Execute();
         }
@@ -34,8 +34,8 @@ namespace RoseByte.SharpArgs
                 throw new SharpArgsException($"No suitable route found for: {value ?? "(null)"}");
             }
             
-            new CliParser(route.Properties(), router.Options)
-                .Parse(args.Skip(defaultUsed ? 0 : 1).ToList());
+            new CliParser().Scan(route.Properties())
+                .Parse(args.Skip(defaultUsed ? 0 : 1).ToList(), router.Options);
             await route.Execute();
         }
     }
