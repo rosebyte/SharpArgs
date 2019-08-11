@@ -4,6 +4,7 @@
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <AssemblyName>RoseByte.SharpArgs</AssemblyName>
         <RootNamespace>RoseByte.SharpArgs</RootNamespace>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
