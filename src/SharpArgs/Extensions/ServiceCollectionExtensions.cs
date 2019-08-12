@@ -17,14 +17,14 @@ namespace RoseByte.SharpArgs
         public static IServiceCollection UseSharpArgs<T>(this IServiceCollection collection, 
             params Assembly[] assemblies)
         {
-            if (collection.Any(x => x.ServiceType == typeof(TypeHelper<T>)))
+            if (collection.Any(x => x.ServiceType == typeof(ITypeHelper<T>)))
             {
                 throw new SharpArgsException(Constants.Exceptions.ServiceCollectionAlreadyUsed);
             }
             
             if (!assemblies.Any())
             {
-                assemblies = new []{Assembly.GetEntryAssembly()};
+                assemblies = new []{Assembly.GetCallingAssembly()};
             }
             
             var types = assemblies
@@ -34,15 +34,15 @@ namespace RoseByte.SharpArgs
                 .Where(x => !x.HasAttribute<IgnoreAttribute>())
                 .Where(x => x != typeof(T))
                 .ToList();
-
-            collection.AddSingleton<ITypeHelper<T>>(new TypeHelper<T>(types));
-            collection.AddTransient<ICliParser, CliParser>();
-            collection.AddTransient<IRouter<T>, Router<T>>();
-
+            
             foreach (var type in types)
             {
                 collection.AddTransient(type);
             }
+            
+            collection.AddSingleton<ITypeHelper<T>>(new TypeHelper<T>(types));
+            collection.AddTransient<ICliParser, CliParser>();
+            collection.AddTransient<IRouter<T>, Router<T>>();
             
             return collection;
         }

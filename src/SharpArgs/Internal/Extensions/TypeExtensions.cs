@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using RoseByte.SharpArgs.Attributes;
 using RoseByte.SharpArgs.Internal.Properties;
 
+[assembly: InternalsVisibleTo("RoseByte.SharpArgs.Tests.dll")]
 namespace RoseByte.SharpArgs.Internal.Extensions
 {
     internal static class TypeExtensions
