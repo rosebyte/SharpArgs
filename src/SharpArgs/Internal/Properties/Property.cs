@@ -13,7 +13,6 @@ namespace RoseByte.SharpArgs.Internal.Properties
         public char? Shortcut => Info.GetAttribute<ShortcutAttribute>()?.Shortcut;
         public string Label => Info.GetAttribute<LabelAttribute>()?.Label ?? Name;
         public string Description => Info.GetAttribute<DescriptionAttribute>()?.Description;
-        public bool Ignore => Info.HasAttribute<IgnoreAttribute>();
         public string Name => Info.Name.ToLower();
         public Type Type => Info.PropertyType;
 

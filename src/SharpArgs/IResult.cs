@@ -7,7 +7,6 @@ namespace RoseByte.SharpArgs
         T Route { get; }
         string[] OriginalArgs { get; }
         string[] CurrentArgs { get; }
-        bool DefaultRouteUsed { get; }
         bool Success { get; }
         IServiceProvider Provider { get; }
     }

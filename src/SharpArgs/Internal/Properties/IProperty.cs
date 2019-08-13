@@ -8,7 +8,6 @@ namespace RoseByte.SharpArgs.Internal.Properties
         char? Shortcut { get; }
         string Label { get; }
         string Description { get; }
-        bool Ignore { get; }
         string Name { get; }
         Type Type { get; }
         void Set(bool value);

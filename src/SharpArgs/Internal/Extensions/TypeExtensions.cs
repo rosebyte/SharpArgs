@@ -21,7 +21,7 @@ namespace RoseByte.SharpArgs.Internal.Extensions
             return (T)source.GetCustomAttributes(true).FirstOrDefault(x => x.GetType() == typeof(T));
         }
 
-        internal static IEnumerable<Property> ExtractProperties(object route)
+        internal static IEnumerable<Property> ExtractProperties(this object route)
         {
             return route.GetType().GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
                 .Where(x => !x.HasAttribute<IgnoreAttribute>())

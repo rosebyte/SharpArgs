@@ -13,7 +13,7 @@ namespace RoseByte.SharpArgs.Internal.Parser
 
         public ICliParser Scan(IEnumerable<Property> properties)
         {
-            foreach (var prop in properties.Where(x => !x.Ignore))
+            foreach (var prop in properties)
             {
                 Register(prop);
             }

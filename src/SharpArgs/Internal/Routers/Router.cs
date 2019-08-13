@@ -12,9 +12,8 @@ namespace RoseByte.SharpArgs.Internal.Routers
         private readonly IReadOnlyDictionary<string, Type> _routes;
         private readonly IServiceProvider _provider;
 
-        protected Router(IServiceProvider provider)
+        internal Router(IServiceProvider provider)
         {
-            _routes = new Dictionary<string, Type>();
             _provider = provider;
             _routes = provider.GetService<ITypeHelper<TRoute>>().Types;
         }
@@ -32,12 +31,9 @@ namespace RoseByte.SharpArgs.Internal.Routers
             
             if (_routes.TryGetValue(name, out var type))
             {
-                return new Result<TRoute>
-                {
-                    Route = (TRoute)_provider.GetService(type),
-                    CurrentArgs = args.Skip(1).ToArray(),
-                    Success = true,
-                };
+                result.Route = (TRoute) _provider.GetService(type);
+                result.CurrentArgs = args.Skip(1).ToArray();
+                result.Success = true;
             }
 
             return result;

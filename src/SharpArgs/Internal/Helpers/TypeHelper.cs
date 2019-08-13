@@ -10,12 +10,12 @@ namespace RoseByte.SharpArgs.Internal.Helpers
     {
         public IReadOnlyDictionary<string, Type> Types { get; }
 
-        public TypeHelper(IReadOnlyList<Type> types)
+        public TypeHelper(IEnumerable<Type> types)
         {
             Types = new ReadOnlyDictionary<string, Type>(GetDictionary(types));
         }
 
-        private Dictionary<string, Type> GetDictionary(IEnumerable<Type> types)
+        private static Dictionary<string, Type> GetDictionary(IEnumerable<Type> types)
         {
             var result = new Dictionary<string, Type>();
             
