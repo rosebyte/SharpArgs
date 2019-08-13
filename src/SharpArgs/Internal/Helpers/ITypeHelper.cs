@@ -5,6 +5,6 @@ namespace RoseByte.SharpArgs.Internal.Helpers
 {
     public interface ITypeHelper<T>
     {
-        IReadOnlyList<Type> Types { get; }
+        IReadOnlyDictionary<string, Type> Types { get; }
     }
 }

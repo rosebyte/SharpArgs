@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using RoseByte.SharpArgs.Exceptions;
 using RoseByte.SharpArgs.Internal.Helpers;
@@ -35,6 +36,23 @@ namespace RoseByte.SharpArgs.Tests.Extensions
             Assert.Contains(provider, x => x.ServiceType == typeof(TestRoute));
             Assert.DoesNotContain(provider, x => x.ServiceType == typeof(IgnoredRoute));
             Assert.DoesNotContain(provider, x => x.ServiceType == typeof(IRoute));
+        }
+        
+        [Fact]
+        public void ShouldPopulateTypeHelperWithTypes()
+        {
+            var provider = new ServiceCollection();
+            provider.UseSharpArgs<IRoute>(typeof(IRoute).Assembly);
+
+            var helper = (ITypeHelper<IRoute>)provider
+                .BuildServiceProvider()
+                .GetService(typeof(ITypeHelper<IRoute>));
+
+            Assert.NotNull(helper);
+            
+            Assert.Contains("testroute", helper.Types);
+            Assert.DoesNotContain("ignoredroute", helper.Types);
+            Assert.Equal(1, helper.Types.Count);
         }
         
         [Fact]
