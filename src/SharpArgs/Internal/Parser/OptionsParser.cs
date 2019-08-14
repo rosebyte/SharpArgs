@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using RoseByte.SharpArgs.Exceptions;
+using RoseByte.SharpArgs.Internal.Parser.Helpers;
+using RoseByte.SharpArgs.Internal.Parser.Options;
+using RoseByte.SharpArgs.Internal.Parser.Parts;
 using RoseByte.SharpArgs.Internal.Properties;
 
 namespace RoseByte.SharpArgs.Internal.Parser
@@ -9,9 +12,7 @@ namespace RoseByte.SharpArgs.Internal.Parser
         public void ParseParams(
             IReadOnlyList<string> args, 
             IReadOnlyParsingOptions options,
-            Dictionary<string, Property> labels,
-            Dictionary<char, Property> shortcuts,
-            HashSet<Property> resolved)
+            IParsingHelper helper)
         {
             for (var i = 0; i < args.Count; i++)
             {
@@ -35,12 +36,12 @@ namespace RoseByte.SharpArgs.Internal.Parser
                     i++;
                 }
 
-                if (part.IsOption && ParseOption(part, next, options, labels, resolved))
+                if (part.IsOption && ParseOption(part, next, options, helper.Labels, helper.Resolved))
                 {
                     continue;
                 }
                 
-                if (part.IsFlag && ParseFlag(part, next, options, shortcuts, resolved))
+                if (part.IsFlag && ParseFlag(part, next, options, helper.Shortcuts, helper.Resolved))
                 {
                     continue;
                 }
@@ -50,7 +51,7 @@ namespace RoseByte.SharpArgs.Internal.Parser
         }
         
         private bool ParseOption(Part part, Part next, IReadOnlyParsingOptions options, 
-            Dictionary<string, Property> labels, HashSet<Property> resolved)
+            Dictionary<string, IProperty> labels, HashSet<IProperty> resolved)
         {
             if (!labels.TryGetValue(part.Label, out var named))
             {
@@ -62,8 +63,8 @@ namespace RoseByte.SharpArgs.Internal.Parser
             return true;
         }
 
-        private void SetValue(Part part, Part next, Property property, IReadOnlyParsingOptions options, 
-            HashSet<Property> resolved)
+        private void SetValue(Part part, Part next, IProperty property, IReadOnlyParsingOptions options, 
+            HashSet<IProperty> resolved)
         {
             if (part.Value != null)
             {
@@ -91,7 +92,7 @@ namespace RoseByte.SharpArgs.Internal.Parser
         }
 
         private bool ParseFlag(Part part, Part next, IReadOnlyParsingOptions options, 
-            Dictionary<char, Property> shortcuts, HashSet<Property> resolved)
+            Dictionary<char, IProperty> shortcuts, HashSet<IProperty> resolved)
         {
             if (part.Label.Length > 1 && !options.CanCombineFlags)
             {

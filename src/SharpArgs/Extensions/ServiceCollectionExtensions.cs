@@ -42,7 +42,7 @@ namespace RoseByte.SharpArgs
             }
             
             collection.AddSingleton<ITypeHelper<T>>(new TypeHelper<T>(types));
-            collection.AddTransient<ICliParser, CliParser>();
+            collection.AddTransient<ICliParser<T>, CliParser<T>>();
             collection.AddTransient<IRouter<T>, Router<T>>();
             
             return collection;

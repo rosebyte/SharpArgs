@@ -1,27 +1,25 @@
 using System.Collections.Generic;
 using System.Linq;
+using RoseByte.SharpArgs.Internal.Parser.Helpers;
 using RoseByte.SharpArgs.Internal.Properties;
 
 namespace RoseByte.SharpArgs.Internal.Parser
 {
     internal class ArgumentsParser
     {
-        public void ParseArgs(
-            IReadOnlyList<string> args, 
-            Dictionary<int, Property> positions, 
-            HashSet<Property> resolved)
+        public void ParseArgs(IReadOnlyList<string> args, IParsingHelper helper)
         {
-            var arguments = positions
+            var arguments = helper.Positions
                 .OrderBy(x => x.Key)
                 .Select(x => x.Value)
-                .Where(x => !resolved.Contains(x))
+                .Where(x => !helper.Resolved.Contains(x))
                 .ToList();
             
             for (var i = 0; i < args.Count; i++)
             {
                 if (i >= arguments.Count) break;
                 arguments[i].Set(args[i]);
-                resolved.Add(arguments[i]);
+                helper.Resolved.Add(arguments[i]);
             }
         }
     }

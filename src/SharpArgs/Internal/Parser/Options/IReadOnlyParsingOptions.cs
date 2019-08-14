@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RoseByte.SharpArgs.Internal.Parser
+namespace RoseByte.SharpArgs.Internal.Parser.Options
 {
     public interface IReadOnlyParsingOptions
     {

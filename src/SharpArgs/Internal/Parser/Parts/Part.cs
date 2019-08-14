@@ -1,8 +1,9 @@
 using System.Linq;
+using RoseByte.SharpArgs.Internal.Parser.Options;
 
-namespace RoseByte.SharpArgs.Internal.Parser
+namespace RoseByte.SharpArgs.Internal.Parser.Parts
 {
-    internal class Part
+    internal class Part : IPart
     {
         public string Content { get; }
         private readonly IReadOnlyParsingOptions _options;
@@ -42,14 +43,25 @@ namespace RoseByte.SharpArgs.Internal.Parser
                     : string.Join(delimiter, result.Split(delimiter).Skip(1));
             }
         }
-        
-        public bool IsOption => Content.StartsWith(_options.OptionPrefix);
+
+        public bool IsOption
+        {
+            get
+            {
+                if (_options.FlagPrefix.Length > _options.OptionPrefix.Length && Content.StartsWith(_options.FlagPrefix))
+                {
+                    return false;
+                }
+
+                return Content.StartsWith(_options.OptionPrefix);
+            }
+        }
         
         public bool IsFlag
         {
             get
             {
-                if (_options.OptionPrefix.Length > 1 && Content.StartsWith(_options.OptionPrefix))
+                if (_options.OptionPrefix.Length >= _options.FlagPrefix.Length && Content.StartsWith(_options.OptionPrefix))
                 {
                     return false;
                 }

@@ -1,6 +1,7 @@
 using System.Linq;
 using RoseByte.SharpArgs.Internal.Extensions;
 using RoseByte.SharpArgs.Internal.Parser;
+using RoseByte.SharpArgs.Internal.Parser.Options;
 
 // ReSharper disable once CheckNamespace
 namespace RoseByte.SharpArgs
@@ -11,9 +12,8 @@ namespace RoseByte.SharpArgs
         {
             if (result.Success)
             {
-                var parser = (ICliParser)result.Provider.GetService(typeof(ICliParser));
-                var properties = TypeExtensions.ExtractProperties(result.Route);
-                parser.Scan(properties);
+                var parser = (ICliParser<T>)result.Provider.GetService(typeof(ICliParser<T>));
+                parser.Register(result);
                 parser.Parse(result.CurrentArgs.ToList(), options);
             }
 

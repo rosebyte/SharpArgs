@@ -39,9 +39,7 @@ namespace RoseByte.SharpArgs.Tests.Extensions
         [Fact]
         public void ShouldExtractProperties()
         {
-            var properties = Internal.Extensions.TypeExtensions
-                .ExtractProperties(new TestRoute())
-                .ToList();
+            var properties = new TestRoute().ExtractProperties().ToList();
             
             Assert.Equal(3, properties.Count);
             Assert.Contains(properties, x => x.Name == "stringprop");

@@ -61,7 +61,7 @@ namespace RoseByte.SharpArgs.Tests.Extensions
             var provider = new ServiceCollection();
             provider.UseSharpArgs<IRoute>();
             Assert.Contains(provider, x => x.ServiceType == typeof(ITypeHelper<IRoute>));
-            Assert.Contains(provider, x => x.ServiceType == typeof(ICliParser));
+            Assert.Contains(provider, x => x.ServiceType == typeof(ICliParser<IRoute>));
             Assert.Contains(provider, x => x.ServiceType == typeof(IRouter<IRoute>));
         }
     }

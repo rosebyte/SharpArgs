@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using RoseByte.SharpArgs.Internal.Parser.Options;
 using RoseByte.SharpArgs.Internal.Properties;
 
 namespace RoseByte.SharpArgs.Internal.Parser
 {
-    public interface ICliParser
+    public interface ICliParser<in T>
     {
-        ICliParser Scan(IEnumerable<Property> properties);
+        void Register(IResult<T> result);
         void Parse(IReadOnlyList<string> args, IReadOnlyParsingOptions options);
     }
 }
