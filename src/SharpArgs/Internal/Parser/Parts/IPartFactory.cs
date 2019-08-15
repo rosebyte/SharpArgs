@@ -4,6 +4,6 @@ namespace RoseByte.SharpArgs.Internal.Parser.Parts
 {
     public interface IPartFactory
     {
-        IPart Create(string content, IReadOnlyParsingOptions options);
+        IPart Create(string content, IParsingOptions options);
     }
 }

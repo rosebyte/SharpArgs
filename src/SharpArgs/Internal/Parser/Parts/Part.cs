@@ -6,7 +6,7 @@ namespace RoseByte.SharpArgs.Internal.Parser.Parts
     internal class Part : IPart
     {
         public string Content { get; }
-        private readonly IReadOnlyParsingOptions _options;
+        private readonly IParsingOptions _options;
 
         public string Label
         {
@@ -70,7 +70,7 @@ namespace RoseByte.SharpArgs.Internal.Parser.Parts
             }
         }
         
-        public Part(string content, IReadOnlyParsingOptions options)
+        public Part(string content, IParsingOptions options)
         {
             Content = content;
             _options = options;

@@ -8,7 +8,7 @@ namespace RoseByte.SharpArgs
 {
     public static class ResultExtensions
     {
-        public static IResult<T> Bind<T>(this IResult<T> result, IReadOnlyParsingOptions options)
+        public static IResult<T> Bind<T>(this IResult<T> result, IParsingOptions options)
         {
             if (result.Success)
             {

@@ -1,6 +1,8 @@
+using System.Linq;
 using Moq;
 using RoseByte.SharpArgs.Internal.Parser.Helpers;
 using RoseByte.SharpArgs.Internal.Properties;
+using RoseByte.SharpArgs.Tests.TestObjects;
 using Xunit;
 
 namespace SharpArgs.Internal.Parser.Helpers
@@ -19,6 +21,28 @@ namespace SharpArgs.Internal.Parser.Helpers
             Assert.Contains(sut.Positions, x => x.Key == 7 && x.Value == property);
             Assert.Contains(sut.Shortcuts, x => x.Key == 't' && x.Value == property);
             Assert.Contains(sut.Labels, x => x.Key == "test-label" && x.Value == property);
+        }
+        
+        [Fact]
+        public void ShouldRegisterFromObject()
+        {
+            var sut = new ParsingHelper(new PropertyTestObject());
+            
+            Assert.Contains(sut.Labels, x => x.Key == nameof(PropertyTestObject.BoolProp).ToLower());
+            Assert.Contains(sut.Labels, x => x.Key == nameof(PropertyTestObject.StrProp).ToLower());
+            Assert.Contains(sut.Labels, x => x.Key == nameof(PropertyTestObject.IntProp).ToLower());
+            Assert.Contains(sut.Labels, x => x.Key == nameof(PropertyTestObject.DateTimeProp).ToLower());
+            Assert.Contains(sut.Labels, x => x.Key == nameof(PropertyTestObject.ShortcutProp).ToLower());
+            Assert.Contains(sut.Labels, x => x.Key == "testme");
+            Assert.Contains(sut.Labels, x => x.Key == nameof(PropertyTestObject.OrderedProp).ToLower());
+            Assert.Contains(sut.Labels, x => x.Key == nameof(PropertyTestObject.DescribedProp).ToLower());
+            Assert.Equal(8, sut.Labels.Count);
+                
+            Assert.Contains(sut.Positions, x => x.Key == 4);
+            Assert.Single(sut.Labels);
+                
+            Assert.Contains(sut.Shortcuts, x => x.Key == 's');
+            Assert.Single(sut.Labels);
         }
     }
 }

@@ -10,9 +10,9 @@ namespace RoseByte.SharpArgs
         public static IRouter<T> Router<T>()
         {
             var provider = new ServiceCollection().UseSharpArgs<T>().BuildServiceProvider();
-            return provider.GetService<Router<T>>();
+            return new Router<T>(provider);
         }
 
-        public static IRouter<T> Router<T>(IServiceProvider provider) => provider.GetService<IRouter<T>>();
+        public static IRouter<T> Router<T>(IServiceProvider provider) => new Router<T>(provider);
     }
 }

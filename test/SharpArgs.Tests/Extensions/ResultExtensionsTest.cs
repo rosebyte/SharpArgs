@@ -26,7 +26,7 @@ namespace RoseByte.SharpArgs.Tests.Extensions
             result.Setup(x => x.Success).Returns(true);
             result.Setup(x => x.CurrentArgs).Returns(args);
             result.Setup(x => x.Route).Returns(route);
-            var options = new Mock<IReadOnlyParsingOptions>();
+            var options = new Mock<IParsingOptions>();
 
             result.Object.Bind(options.Object);
             
@@ -39,7 +39,7 @@ namespace RoseByte.SharpArgs.Tests.Extensions
         {
             var result = new Mock<IResult<IRoute>>();
             result.Setup(x => x.Success).Returns(false);
-            var options = new Mock<IReadOnlyParsingOptions>();
+            var options = new Mock<IParsingOptions>();
 
             result.Object.Bind(options.Object);
             

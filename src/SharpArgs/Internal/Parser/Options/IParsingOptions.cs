@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace RoseByte.SharpArgs.Internal.Parser.Options
 {
-    public interface IReadOnlyParsingOptions
+    public interface IParsingOptions
     {
         string FlagPrefix { get; }
         string OptionPrefix { get; }

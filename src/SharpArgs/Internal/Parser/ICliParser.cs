@@ -7,6 +7,6 @@ namespace RoseByte.SharpArgs.Internal.Parser
     public interface ICliParser<in T>
     {
         void Register(IResult<T> result);
-        void Parse(IReadOnlyList<string> args, IReadOnlyParsingOptions options);
+        void Parse(IReadOnlyList<string> args, IParsingOptions options);
     }
 }

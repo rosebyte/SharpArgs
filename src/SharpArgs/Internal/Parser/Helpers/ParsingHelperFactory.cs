@@ -9,5 +9,10 @@ namespace RoseByte.SharpArgs.Internal.Parser.Helpers
         {
             return new ParsingHelper(properties);
         }
+        
+        public IParsingHelper Create(object route)
+        {
+            return new ParsingHelper(route);
+        }
     }
 }

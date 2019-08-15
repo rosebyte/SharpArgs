@@ -1,9 +1,8 @@
-using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using RoseByte.SharpArgs.Exceptions;
 using RoseByte.SharpArgs.Internal.Helpers;
 using RoseByte.SharpArgs.Internal.Parser;
-using RoseByte.SharpArgs.Internal.Routers.BaseClasses;
+using RoseByte.SharpArgs.Internal.Parser.Helpers;
 using RoseByte.SharpArgs.Tests.TestObjects;
 using SharpArgs.TestObjects;
 using Xunit;
@@ -51,8 +50,9 @@ namespace RoseByte.SharpArgs.Tests.Extensions
             Assert.NotNull(helper);
             
             Assert.Contains("testroute", helper.Types);
+            Assert.Contains("bindingtest", helper.Types);
             Assert.DoesNotContain("ignoredroute", helper.Types);
-            Assert.Equal(1, helper.Types.Count);
+            Assert.Equal(2, helper.Types.Count);
         }
         
         [Fact]
@@ -62,7 +62,9 @@ namespace RoseByte.SharpArgs.Tests.Extensions
             provider.UseSharpArgs<IRoute>();
             Assert.Contains(provider, x => x.ServiceType == typeof(ITypeHelper<IRoute>));
             Assert.Contains(provider, x => x.ServiceType == typeof(ICliParser<IRoute>));
-            Assert.Contains(provider, x => x.ServiceType == typeof(IRouter<IRoute>));
+            Assert.Contains(provider, x => x.ServiceType == typeof(IParsingHelperFactory));
+            Assert.Contains(provider, x => x.ServiceType == typeof(IArgumentsParser));
+            Assert.Contains(provider, x => x.ServiceType == typeof(IOptionsParser));
         }
     }
 }

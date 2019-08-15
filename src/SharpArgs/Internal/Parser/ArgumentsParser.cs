@@ -5,7 +5,7 @@ using RoseByte.SharpArgs.Internal.Properties;
 
 namespace RoseByte.SharpArgs.Internal.Parser
 {
-    internal class ArgumentsParser
+    internal class ArgumentsParser : IArgumentsParser
     {
         public void ParseArgs(IReadOnlyList<string> args, IParsingHelper helper)
         {

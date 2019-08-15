@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RoseByte.SharpArgs.Internal.Extensions;
 using RoseByte.SharpArgs.Internal.Parser.Helpers;
 using RoseByte.SharpArgs.Internal.Parser.Options;
 
@@ -15,19 +14,19 @@ namespace RoseByte.SharpArgs.Internal.Parser
         public void Register(IResult<T> result)
         {
             _helper = ((IParsingHelperFactory)result.Provider.GetService(typeof(IParsingHelperFactory)))
-                .Create(result.Route.ExtractProperties());
+                .Create(result.Route);
             _provider = result.Provider;
         }
         
-        public void Parse(IReadOnlyList<string> args, IReadOnlyParsingOptions options)
+        public void Parse(IReadOnlyList<string> args, IParsingOptions options)
         {
             var arguments = args
                 .TakeWhile(arg => !arg.StartsWith(options.OptionPrefix) && !arg.StartsWith(options.FlagPrefix))
                 .ToList();
             
-            ((OptionsParser)_provider.GetService(typeof(OptionsParser)))
+            ((IOptionsParser)_provider.GetService(typeof(IOptionsParser)))
                 .ParseParams(args.Skip(arguments.Count).ToList(), options, _helper);
-            ((ArgumentsParser)_provider.GetService(typeof(ArgumentsParser)))
+            ((IArgumentsParser)_provider.GetService(typeof(IArgumentsParser)))
                 .ParseArgs(arguments, _helper);
         }
     }

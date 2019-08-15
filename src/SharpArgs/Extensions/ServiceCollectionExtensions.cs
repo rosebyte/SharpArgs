@@ -7,8 +7,7 @@ using RoseByte.SharpArgs.Internal;
 using RoseByte.SharpArgs.Internal.Extensions;
 using RoseByte.SharpArgs.Internal.Helpers;
 using RoseByte.SharpArgs.Internal.Parser;
-using RoseByte.SharpArgs.Internal.Routers;
-using RoseByte.SharpArgs.Internal.Routers.BaseClasses;
+using RoseByte.SharpArgs.Internal.Parser.Helpers;
 
 // ReSharper disable once CheckNamespace
 namespace RoseByte.SharpArgs
@@ -42,8 +41,10 @@ namespace RoseByte.SharpArgs
             }
             
             collection.AddSingleton<ITypeHelper<T>>(new TypeHelper<T>(types));
-            collection.AddTransient<ICliParser<T>, CliParser<T>>();
-            collection.AddTransient<IRouter<T>, Router<T>>();
+            collection.AddSingleton<IParsingHelperFactory, ParsingHelperFactory>();
+            collection.AddSingleton<IArgumentsParser, ArgumentsParser>();
+            collection.AddSingleton<IOptionsParser, OptionsParser>();
+            collection.AddSingleton<ICliParser<T>, CliParser<T>>();
             
             return collection;
         }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RoseByte.SharpArgs.Internal.Extensions;
 using RoseByte.SharpArgs.Internal.Properties;
 
 namespace RoseByte.SharpArgs.Internal.Parser.Helpers
@@ -10,6 +11,8 @@ namespace RoseByte.SharpArgs.Internal.Parser.Helpers
         public Dictionary<char, IProperty> Shortcuts { get; }
         public HashSet<IProperty> Resolved { get; }
 
+        public ParsingHelper(object route) : this(route.ExtractProperties()) { }
+        
         public ParsingHelper(IEnumerable<IProperty> properties)
         {
             Labels = new Dictionary<string, IProperty>();

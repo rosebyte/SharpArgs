@@ -7,12 +7,9 @@ using RoseByte.SharpArgs.Internal.Properties;
 
 namespace RoseByte.SharpArgs.Internal.Parser
 {
-    internal class OptionsParser
+    internal class OptionsParser : IOptionsParser
     {
-        public void ParseParams(
-            IReadOnlyList<string> args, 
-            IReadOnlyParsingOptions options,
-            IParsingHelper helper)
+        public void ParseParams(IReadOnlyList<string> args, IParsingOptions options, IParsingHelper helper)
         {
             for (var i = 0; i < args.Count; i++)
             {
@@ -22,9 +19,7 @@ namespace RoseByte.SharpArgs.Internal.Parser
                     throw new SharpArgsException($"Unknown part: '{part.Content}'.");
                 }
 
-                var next = i + 1 < args.Count 
-                    ? new Part(args[i + 1], options)
-                    : null;
+                var next = i + 1 < args.Count ? new Part(args[i + 1], options) : null;
 
                 if (next != null && (next.IsOption || next.IsFlag))
                 {
@@ -50,20 +45,19 @@ namespace RoseByte.SharpArgs.Internal.Parser
             }
         }
         
-        private bool ParseOption(Part part, Part next, IReadOnlyParsingOptions options, 
+        private bool ParseOption(Part part, Part next, IParsingOptions options, 
             Dictionary<string, IProperty> labels, HashSet<IProperty> resolved)
         {
-            if (!labels.TryGetValue(part.Label, out var named))
+            if (!labels.TryGetValue(part.Label.ToLower(), out var named))
             {
                 return false;
             }
             
             SetValue(part, next, named, options, resolved);
-            
             return true;
         }
 
-        private void SetValue(Part part, Part next, IProperty property, IReadOnlyParsingOptions options, 
+        private void SetValue(Part part, Part next, IProperty property, IParsingOptions options, 
             HashSet<IProperty> resolved)
         {
             if (part.Value != null)
@@ -91,7 +85,7 @@ namespace RoseByte.SharpArgs.Internal.Parser
             }
         }
 
-        private bool ParseFlag(Part part, Part next, IReadOnlyParsingOptions options, 
+        private bool ParseFlag(Part part, Part next, IParsingOptions options, 
             Dictionary<char, IProperty> shortcuts, HashSet<IProperty> resolved)
         {
             if (part.Label.Length > 1 && !options.CanCombineFlags)
