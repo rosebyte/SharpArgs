@@ -7,7 +7,7 @@ using RoseByte.SharpArgs.Internal.Properties;
 
 namespace RoseByte.SharpArgs.Internal.Parser
 {
-    internal class OptionsParser : IOptionsParser
+    public class OptionsParser : IOptionsParser
     {
         public void ParseParams(IReadOnlyList<string> args, IParsingOptions options, IParsingHelper helper)
         {

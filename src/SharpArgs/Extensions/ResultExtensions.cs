@@ -8,8 +8,13 @@ namespace RoseByte.SharpArgs
 {
     public static class ResultExtensions
     {
-        public static IResult<T> Bind<T>(this IResult<T> result, IParsingOptions options)
+        public static IResult<T> Bind<T>(this IResult<T> result, IParsingOptions options = null)
         {
+            if (options == null)
+            {
+                options = new ParsingOptions();
+            }
+            
             if (result.Success)
             {
                 var parser = (ICliParser<T>)result.Provider.GetService(typeof(ICliParser<T>));
