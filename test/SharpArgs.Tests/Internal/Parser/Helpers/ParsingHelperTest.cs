@@ -17,9 +17,9 @@ namespace RoseByte.SharpArgs.Tests.Internal.Parser.Helpers
             property.Setup(x => x.Label).Returns("test-label");
             var sut = new ParsingHelper(new []{property.Object});
 
-            Assert.Contains(sut.Positions, x => x.Key == 7 && x.Value == property);
-            Assert.Contains(sut.Shortcuts, x => x.Key == 't' && x.Value == property);
-            Assert.Contains(sut.Labels, x => x.Key == "test-label" && x.Value == property);
+            Assert.Contains(sut.Positions, x => x.Key == 7 && x.Value == property.Object);
+            Assert.Contains(sut.Shortcuts, x => x.Key == 't' && x.Value == property.Object);
+            Assert.Contains(sut.Labels, x => x.Key == "test-label" && x.Value == property.Object);
         }
         
         [Fact]
@@ -38,10 +38,10 @@ namespace RoseByte.SharpArgs.Tests.Internal.Parser.Helpers
             Assert.Equal(8, sut.Labels.Count);
                 
             Assert.Contains(sut.Positions, x => x.Key == 4);
-            Assert.Single(sut.Labels);
+            Assert.Single(sut.Positions);
                 
             Assert.Contains(sut.Shortcuts, x => x.Key == 's');
-            Assert.Single(sut.Labels);
+            Assert.Single(sut.Shortcuts);
         }
     }
 }
