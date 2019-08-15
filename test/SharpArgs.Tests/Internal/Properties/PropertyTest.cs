@@ -1,12 +1,11 @@
 using System;
 using System.Linq;
-using System.Reflection;
 using RoseByte.SharpArgs.Internal.Extensions;
 using RoseByte.SharpArgs.Internal.Properties;
 using RoseByte.SharpArgs.Tests.TestObjects;
 using Xunit;
 
-namespace SharpArgs.Internal.Properties
+namespace RoseByte.SharpArgs.Tests.Internal.Properties
 {
     public class PropertyTest
     {

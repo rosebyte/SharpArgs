@@ -1,10 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
-using RoseByte.SharpArgs;
 using RoseByte.SharpArgs.Internal.Routers;
 using RoseByte.SharpArgs.Tests.TestObjects;
 using Xunit;
 
-namespace SharpArgs.Internal.Routers
+namespace RoseByte.SharpArgs.Tests.Internal.Routers
 {
     public class RouterTest
     {

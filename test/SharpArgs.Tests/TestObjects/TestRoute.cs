@@ -1,5 +1,4 @@
 using RoseByte.SharpArgs.Attributes;
-using SharpArgs.TestObjects;
 
 namespace RoseByte.SharpArgs.Tests.TestObjects
 {

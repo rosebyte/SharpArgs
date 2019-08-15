@@ -4,7 +4,7 @@ using RoseByte.SharpArgs.Internal.Extensions;
 using RoseByte.SharpArgs.Tests.TestObjects;
 using Xunit;
 
-namespace RoseByte.SharpArgs.Tests.Extensions
+namespace RoseByte.SharpArgs.Tests.Internal.Extensions
 {
     public class PropertyInfoExtensionsTest
     {

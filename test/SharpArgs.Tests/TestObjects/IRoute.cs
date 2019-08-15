@@ -1,4 +1,4 @@
-namespace SharpArgs.TestObjects
+namespace RoseByte.SharpArgs.Tests.TestObjects
 {
     public interface IRoute
     {

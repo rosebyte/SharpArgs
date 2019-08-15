@@ -5,7 +5,6 @@ using RoseByte.SharpArgs.Internal.Parser;
 using RoseByte.SharpArgs.Internal.Parser.Helpers;
 using RoseByte.SharpArgs.Internal.Parser.Options;
 using RoseByte.SharpArgs.Tests.TestObjects;
-using SharpArgs.TestObjects;
 using Xunit;
 
 namespace RoseByte.SharpArgs.Tests.Internal.Parser

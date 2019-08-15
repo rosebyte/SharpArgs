@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
 using RoseByte.SharpArgs.Internal.Helpers;
 using RoseByte.SharpArgs.Tests.TestObjects;
 using Xunit;
 
-namespace SharpArgs.Internal.Helpers
+namespace RoseByte.SharpArgs.Tests.Internal.Helpers
 {
     public class TypeHelperTest
     {

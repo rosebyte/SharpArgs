@@ -1,11 +1,10 @@
-using System.Linq;
 using Moq;
 using RoseByte.SharpArgs.Internal.Parser.Helpers;
 using RoseByte.SharpArgs.Internal.Properties;
 using RoseByte.SharpArgs.Tests.TestObjects;
 using Xunit;
 
-namespace SharpArgs.Internal.Parser.Helpers
+namespace RoseByte.SharpArgs.Tests.Internal.Parser.Helpers
 {
     public class ParsingHelperTest
     {

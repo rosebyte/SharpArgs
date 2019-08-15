@@ -1,4 +1,4 @@
-namespace RoseByte.SharpArgs.Internal.Routers.BaseClasses
+namespace RoseByte.SharpArgs.Internal.Routers
 {
     public interface IRouter<TRoute>
     {
