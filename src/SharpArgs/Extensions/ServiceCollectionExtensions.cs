@@ -31,8 +31,8 @@ namespace RoseByte.SharpArgs
                 .Distinct()
                 .SelectMany(x => x.GetTypes())
                 .Where(typeof(T).IsAssignableFrom)
+                .Where(x => x != typeof(T) && !x.IsAbstract)
                 .Where(x => !x.HasAttribute<IgnoreAttribute>())
-                .Where(x => x != typeof(T))
                 .ToList();
             
             foreach (var type in types)
