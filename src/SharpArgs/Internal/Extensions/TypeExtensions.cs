@@ -18,7 +18,7 @@ namespace RoseByte.SharpArgs.Internal.Extensions
         
         internal static T GetAttribute<T>(this Type source) where T : Attribute
         {
-            return (T)source.GetCustomAttributes(true).FirstOrDefault(x => x.GetType() == typeof(T));
+            return (T)source.GetCustomAttribute(typeof(T));
         }
 
         internal static IEnumerable<Property> ExtractProperties(this object route)
