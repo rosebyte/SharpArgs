@@ -146,7 +146,7 @@ namespace SharpArgs.Tests
         public void InitializeDecimalArgument()
         {
             var sut = new DummyDecimalArgument("test");
-            Assert.True(sut.Initialize("test", "10,5"));
+            Assert.True(sut.Initialize("test", "10.5"));
             Assert.Equal(10.5M, sut.Value);
         }
     }

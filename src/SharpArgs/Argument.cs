@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 
 namespace RoseByte.SharpArgs
@@ -92,7 +93,7 @@ namespace RoseByte.SharpArgs
         private void SetValue(string value)
         {
             var converter = TypeDescriptor.GetConverter(typeof(T));
-            var result = converter.ConvertFromString(value);
+            var result = converter.ConvertFromString(null, CultureInfo.InvariantCulture, value);
             _value = (T)result;
             Initialized = true;
         }
