@@ -1,6 +1,4 @@
-﻿using RoseByte.SharpArgs.Internal;
-
-namespace RoseByte.SharpArgs.Options
+﻿namespace RoseByte.SharpArgs
 {
     public class Option<T> : Argument<T>
     {

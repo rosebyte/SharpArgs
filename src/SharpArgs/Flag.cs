@@ -1,6 +1,4 @@
-﻿using RoseByte.SharpArgs.Internal;
-
-namespace RoseByte.SharpArgs
+﻿namespace RoseByte.SharpArgs
 {
     public class Flag : Argument<bool>
     {

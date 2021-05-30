@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RoseByte.SharpArgs.Internal;
-using RoseByte.SharpArgs.Internal.Parser;
+using RoseByte.SharpArgs.Parsers;
 
 namespace RoseByte.SharpArgs
 {
     public class Command
     {
-        public virtual IArgumentsParser Parser { get; set; } = UnixArgumentsParser.Instance;
-
         public virtual string Name => null;
         public virtual IEnumerable<Command> Commands { get; }
         private List<Argument> _arguments;
@@ -65,25 +62,39 @@ namespace RoseByte.SharpArgs
         }
 
         protected virtual void Validate() { }
-
-        public void Run(params string[] args)
+        
+        public void Run(IArgumentsParser parser, params string[] args)
         {
+            parser = parser ?? Parser.Unix;
+            
             if (!TryDelegate(args))
             {
-                Parser.ParseArgs(args, Arguments);
+                parser.ParseArgs(args, Arguments);
                 Validate();
                 Execute();
             }
         }
         
-        public async Task RunAsync(params string[] args)
+        public void Run(params string[] args)
         {
+            Run(Parser.Unix, args);
+        }
+        
+        public async Task RunAsync(IArgumentsParser parser, params string[] args)
+        {
+            parser = parser ?? Parser.Unix;
+            
             if (!TryDelegate(args))
             {
-                Parser.ParseArgs(args, Arguments);
+                parser.ParseArgs(args, Arguments);
                 Validate();
                 await ExecuteAsync();
             }
+        }
+        
+        public Task RunAsync(params string[] args)
+        {
+            return RunAsync(Parser.Unix, args);
         }
 
         private bool TryDelegate(string[] args)

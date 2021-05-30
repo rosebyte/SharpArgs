@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Moq;
 using RoseByte.SharpArgs;
-using RoseByte.SharpArgs.Internal;
-using RoseByte.SharpArgs.Internal.Parser;
-using RoseByte.SharpArgs.Options;
+using RoseByte.SharpArgs.Parsers;
 using SharpArgs.Tests.TestObjects.Commands;
 using Xunit;
 
@@ -19,7 +15,7 @@ namespace SharpArgs.Tests
         {
             var result = "";
 
-            var sut = new RootCommand(x => result = x) {Parser = new Mock<IArgumentsParser>().Object};
+            var sut = new RootCommand(x => result = x);
             sut.Run("first");
             
             Assert.Equal("first", result);
@@ -30,7 +26,7 @@ namespace SharpArgs.Tests
         {
             var result = "";
 
-            var sut = new RootCommand(x => result = x) {Parser = new Mock<IArgumentsParser>().Object};
+            var sut = new RootCommand(x => result = x);
             sut.Run("first");
             
             Assert.Equal("first", result);
@@ -41,8 +37,8 @@ namespace SharpArgs.Tests
         {
             var result = "";
 
-            var sut = new RootCommand(x => result = x) {Parser = new Mock<IArgumentsParser>().Object};
-            sut.Run("third");
+            var sut = new RootCommand(x => result = x);
+            sut.Run(new Mock<IArgumentsParser>().Object, "third");
             
             Assert.Equal("", result);
         }
@@ -102,8 +98,8 @@ namespace SharpArgs.Tests
                 args,
                 It.Is<List<Argument>>(y => y.Count == 2 && y[0] == flag && y[1] == option)));
 
-            var sut = new ParserCommand(flag, option) {Parser = parserMock.Object};
-            await sut.RunAsync(args);
+            var sut = new ParserCommand(flag, option);
+            await sut.RunAsync(parserMock.Object, args);
         }
         
         [Fact]
@@ -117,8 +113,8 @@ namespace SharpArgs.Tests
                 args,
                 It.Is<List<Argument>>(y => y.Count == 2 && y[0] == flag && y[1] == option)));
 
-            var sut = new ParserCommand(flag, option) {Parser = parserMock.Object};
-            await sut.RunAsync(args);
+            var sut = new ParserCommand(flag, option);
+            await sut.RunAsync(parserMock.Object,args);
         }
         
         [Fact]
@@ -129,8 +125,8 @@ namespace SharpArgs.Tests
             parserMock.Setup(x => x.ParseArgs(It.IsAny<IReadOnlyList<string>>(), It.IsAny<List<Argument>>()))
                 .Callback<IReadOnlyList<string>, List<Argument>>((_, y) => arguments = y);
 
-            var sut = new ArgumentsCommand {Parser = parserMock.Object};
-            sut.Run();
+            var sut = new ArgumentsCommand();
+            sut.Run(parserMock.Object);
 
             Assert.Equal(4, arguments.Count);
         }

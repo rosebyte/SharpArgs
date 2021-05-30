@@ -1,6 +1,6 @@
 ﻿using RoseByte.SharpArgs;
 
-namespace SharpArgs.Tests.TestObjects.Arguments
+namespace SharpArgs.Tests.TestObjects.Arguments.Flags
 {
     public class FirstFlag : Flag
     {

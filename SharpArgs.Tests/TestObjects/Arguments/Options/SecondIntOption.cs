@@ -1,6 +1,6 @@
-﻿using RoseByte.SharpArgs.Options;
+﻿using RoseByte.SharpArgs;
 
-namespace SharpArgs.Tests.TestObjects.Arguments
+namespace SharpArgs.Tests.TestObjects.Arguments.Options
 {
     public class SecondIntOption : Option<int>
     {

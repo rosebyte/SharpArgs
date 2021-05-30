@@ -1,5 +1,4 @@
 ﻿using System;
-using RoseByte.SharpArgs.Internal;
 
 namespace RoseByte.SharpArgs
 {

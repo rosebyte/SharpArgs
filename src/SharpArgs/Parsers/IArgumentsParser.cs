@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RoseByte.SharpArgs.Internal.Parser
+namespace RoseByte.SharpArgs.Parsers
 {
     public interface IArgumentsParser
     {

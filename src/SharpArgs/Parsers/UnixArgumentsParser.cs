@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RoseByte.SharpArgs.Internal.Parser
+namespace RoseByte.SharpArgs.Parsers
 {
     internal class UnixArgumentsParser : IArgumentsParser
     {
-        public static IArgumentsParser Instance { get; } = new UnixArgumentsParser();
-        
         public void ParseArgs(IReadOnlyList<string> args, List<Argument> arguments)
         {
             var positionalMode = false;
@@ -32,9 +30,16 @@ namespace RoseByte.SharpArgs.Internal.Parser
                 }
                 else
                 {
-                    foreach (var flag in args[i].ToLowerInvariant().Skip(1))
+                    try
                     {
-                        ProcessParameter(flag, null, arguments.Where(x => x.Combinable));
+                        foreach (var flag in args[i].ToLowerInvariant().Skip(1))
+                        {
+                            ProcessParameter(flag, null, arguments.Where(x => x.Combinable));
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        throw SharpArgsException.UnbindableGroup(args[i], exception);
                     }
                 }
             }
@@ -42,7 +47,13 @@ namespace RoseByte.SharpArgs.Internal.Parser
 
         private string GetValue(IReadOnlyList<string> args, ref int i)
         {
-            return i < args.Count - 2 && !args[i + 1].StartsWith("-") ? args[++i] : null;
+            if (i < args.Count - 1 && !args[i + 1].StartsWith("-"))
+            {
+                i++;
+                return args[i];
+            }
+            
+            return null;
         }
 
         private void ProcessParameter(string name, string value, IEnumerable<Argument> arguments)
@@ -55,7 +66,7 @@ namespace RoseByte.SharpArgs.Internal.Parser
                 }
             }
 
-            throw new Exception();
+            throw SharpArgsException.UnbindableParameter(name);
         }
 
         private void ProcessParameter(char name, string value, IEnumerable<Argument> arguments)
@@ -68,7 +79,7 @@ namespace RoseByte.SharpArgs.Internal.Parser
                 }
             }
 
-            throw new Exception();
+            throw SharpArgsException.UnbindableParameter(name);
         }
 
         private void ProcesOption(string value, int order, IEnumerable<Argument> arguments)
@@ -81,7 +92,7 @@ namespace RoseByte.SharpArgs.Internal.Parser
                 }
             }
 
-            throw new Exception();
+            throw SharpArgsException.UnbindableOption(order);
         }
     }
 }

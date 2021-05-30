@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 
-namespace RoseByte.SharpArgs.Internal
+namespace RoseByte.SharpArgs
 {
     public abstract class Argument
     {
@@ -60,7 +60,7 @@ namespace RoseByte.SharpArgs.Internal
                 return false;
             }
             
-            SetValue(value);
+            SetValue(value ?? "true");
             Validate();
             return true;
         }
@@ -72,7 +72,7 @@ namespace RoseByte.SharpArgs.Internal
                 return false;
             }
             
-            SetValue(value);
+            SetValue(value ?? "true");
             Validate();
             return true;
         }

@@ -1,5 +1,4 @@
 ﻿using RoseByte.SharpArgs;
-using RoseByte.SharpArgs.Options;
 using Xunit;
 
 namespace SharpArgs.Tests
