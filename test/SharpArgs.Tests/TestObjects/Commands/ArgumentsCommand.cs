@@ -1,5 +1,4 @@
 ﻿using RoseByte.SharpArgs;
-using SharpArgs.Tests.TestObjects.Arguments;
 using SharpArgs.Tests.TestObjects.Arguments.Flags;
 
 namespace SharpArgs.Tests.TestObjects.Commands

@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpArgs", "src\SharpArgs\SharpArgs.csproj", "{01AC8003-64C6-426D-8292-02F364A5A48C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpArgs.Tests", "SharpArgs.Tests\SharpArgs.Tests.csproj", "{F82C1A6F-EF50-4C2D-85D1-53C85B460A2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpArgs.Tests", "test\SharpArgs.Tests\SharpArgs.Tests.csproj", "{F82C1A6F-EF50-4C2D-85D1-53C85B460A2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
