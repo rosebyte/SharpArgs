@@ -6,6 +6,69 @@ using RoseByte.SharpArgs.Parsers;
 
 namespace RoseByte.SharpArgs
 {
+    public class Command<T> : Command
+    {
+        protected sealed override void Execute() => Execute(default);
+        protected sealed override Task ExecuteAsync() => ExecuteAsync(default);
+
+        protected virtual void Execute(T context) { }
+        protected virtual Task ExecuteAsync(T context) => Task.CompletedTask;
+
+        public Command() { }
+        public Command(params Command[] commands) : base(commands) { }
+        
+        protected bool TryDelegate(T context, string[] args)
+        {
+            var subcommand = Commands?
+                .Where(x => x.Name != null)
+                .FirstOrDefault(x => string.Equals(x.Name, args?.FirstOrDefault(), StringComparison.OrdinalIgnoreCase));
+
+            if (subcommand == null)
+            {
+                return false;
+            }
+
+            if (subcommand is Command<T> sc)
+            {
+                sc.Run(context, args?.Skip(1).ToArray());
+            }
+            else
+            {
+                subcommand.Run(args?.Skip(1).ToArray());
+            }
+            
+            return true;
+        }
+        
+        public void Run(T context, params string[] args) => Run(context, Parser.Unix, args);
+        
+        public void Run(T context, IArgumentsParser parser, params string[] args)
+        {
+            parser = parser ?? Parser.Unix;
+            
+            if (!TryDelegate(context, args))
+            {
+                parser.ParseArgs(args, Arguments);
+                Validate();
+                Execute(context);
+            }
+        }
+        
+        public Task RunAsync(T context, params string[] args) => RunAsync(context, Parser.Unix, args);
+        
+        public async Task RunAsync(T context, IArgumentsParser parser, params string[] args)
+        {
+            parser = parser ?? Parser.Unix;
+            
+            if (!TryDelegate(context, args))
+            {
+                parser.ParseArgs(args, Arguments);
+                Validate();
+                await ExecuteAsync(context);
+            }
+        }
+    }
+    
     public class Command
     {
         public virtual string Name => null;
@@ -97,7 +160,7 @@ namespace RoseByte.SharpArgs
             return RunAsync(Parser.Unix, args);
         }
 
-        private bool TryDelegate(string[] args)
+        protected virtual bool TryDelegate(string[] args)
         {
             var subcommand = Commands?
                 .Where(x => x.Name != null)
